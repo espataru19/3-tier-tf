@@ -27,3 +27,12 @@ module "db_tier" {
   db_password       = var.db_password
 }
 
+terraform {
+  backend "s3" {
+    bucket         = "tf-state-bucket"
+    key            = "3-tier-architecture/terraform.tfstate"
+    region         = "us-west-2"
+    dynamodb_table = "terraform-locks"
+    encrypt        = true
+  }
+}
